@@ -11,16 +11,14 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@strapi/plugin-i18n": "4.13.6",
-    "@strapi/plugin-users-permissions": "4.13.6",
-    "@strapi/strapi": "4.13.6",
+    "@strapi/strapi": "4.7.0",
+    "@strapi/plugin-users-permissions": "4.7.0",
+    "@strapi/plugin-i18n": "4.7.0",
     "better-sqlite3": "8.6.0",
-    "pg": "^8.11.3",
-    "strapi-plugin-netlify-deployments": "^2.0.2",
-    "strapi-provider-upload-supabase": "^1.0.0"
+    "pg": "^8.11.3"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "PrismLebanon"
   },
   "strapi": {
     "uuid": "bf01d085-d3ed-47bb-a43a-478cc4d8c439"
