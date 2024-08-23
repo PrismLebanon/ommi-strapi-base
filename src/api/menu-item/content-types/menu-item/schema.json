@@ -4,7 +4,8 @@
   "info": {
     "singularName": "menu-item",
     "pluralName": "menu-items",
-    "displayName": "MenuItem"
+    "displayName": "MenuItem",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -45,19 +46,31 @@
       "unique": false
     },
     "itemPicture": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
       ],
-      "type": "media",
-      "multiple": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
+    },
+    "item_tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::item-tag.item-tag"
+    },
+    "item_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::item-categorie.item-categorie",
+      "inversedBy": "menu_items"
     }
   }
 }
