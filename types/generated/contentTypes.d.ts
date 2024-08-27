@@ -813,6 +813,61 @@ export interface ApiBlogBlog extends Schema.CollectionType {
   };
 }
 
+export interface ApiItemAdditiveItemAdditive extends Schema.CollectionType {
+  collectionName: 'item_additives';
+  info: {
+    singularName: 'item-additive';
+    pluralName: 'item-additives';
+    displayName: 'ItemAdditive';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    ItemAdditiveName: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    ItemAdditivePrice: Attribute.Decimal &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::item-additive.item-additive',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::item-additive.item-additive',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::item-additive.item-additive',
+      'oneToMany',
+      'api::item-additive.item-additive'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiItemCategorieItemCategorie extends Schema.CollectionType {
   collectionName: 'item_categories';
   info: {
@@ -959,6 +1014,11 @@ export interface ApiMenuItemMenuItem extends Schema.CollectionType {
       'manyToOne',
       'api::item-categorie.item-categorie'
     >;
+    item_additives: Attribute.Relation<
+      'api::menu-item.menu-item',
+      'oneToMany',
+      'api::item-additive.item-additive'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1002,6 +1062,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::blog.blog': ApiBlogBlog;
+      'api::item-additive.item-additive': ApiItemAdditiveItemAdditive;
       'api::item-categorie.item-categorie': ApiItemCategorieItemCategorie;
       'api::item-tag.item-tag': ApiItemTagItemTag;
       'api::menu-item.menu-item': ApiMenuItemMenuItem;

@@ -71,6 +71,11 @@
       "relation": "manyToOne",
       "target": "api::item-categorie.item-categorie",
       "inversedBy": "menu_items"
+    },
+    "item_additives": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::item-additive.item-additive"
     }
   }
 }
