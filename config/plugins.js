@@ -14,6 +14,12 @@ module.exports = ({ env }) => ({
         uploadStream: {},
         delete: {},
       },
+      "soft-delete": {
+        enabled: true,
+      },
+      notes: {
+        enabled: true,
+      },
     },
   },
 });
