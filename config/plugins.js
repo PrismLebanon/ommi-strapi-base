@@ -20,6 +20,12 @@ module.exports = ({ env }) => ({
       notes: {
         enabled: true,
       },
+      "import-export-entries": {
+        enabled: true,
+        config: {
+          // See `Config` section.
+        },
+      },
     },
   },
 });
