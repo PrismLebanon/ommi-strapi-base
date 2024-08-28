@@ -1,33 +1,17 @@
 {
   "kind": "collectionType",
-  "collectionName": "item_categories",
+  "collectionName": "item_images",
   "info": {
-    "singularName": "item-categorie",
-    "pluralName": "item-categories",
-    "displayName": "itemCategory",
+    "singularName": "item-image",
+    "pluralName": "item-images",
+    "displayName": "ItemImage",
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "categoryName": {
-      "type": "string",
-      "required": true
-    },
-    "categorySubtext": {
-      "type": "text"
-    },
-    "categoryDescription": {
-      "type": "text"
-    },
-    "menu_items": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::menu-item.menu-item",
-      "mappedBy": "item_category"
-    },
     "_softDeletedAt": {
       "type": "datetime",
       "configurable": false,
@@ -48,6 +32,23 @@
       "writable": false,
       "visible": false,
       "private": true
+    },
+    "itemImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "menu_item": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::menu-item.menu-item",
+      "mappedBy": "item_image"
     }
   }
 }

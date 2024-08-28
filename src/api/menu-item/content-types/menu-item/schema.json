@@ -16,6 +16,27 @@
     }
   },
   "attributes": {
+    "_softDeletedAt": {
+      "type": "datetime",
+      "configurable": false,
+      "writable": false,
+      "visible": false,
+      "private": true
+    },
+    "_softDeletedById": {
+      "type": "integer",
+      "configurable": false,
+      "writable": false,
+      "visible": false,
+      "private": true
+    },
+    "_softDeletedByType": {
+      "type": "string",
+      "configurable": false,
+      "writable": false,
+      "visible": false,
+      "private": true
+    },
     "itemName": {
       "pluginOptions": {
         "i18n": {
@@ -45,22 +66,6 @@
       "required": true,
       "unique": false
     },
-    "itemPicture": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "item_tags": {
       "type": "relation",
       "relation": "oneToMany",
@@ -76,6 +81,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::item-additive.item-additive"
+    },
+    "item_image": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::item-image.item-image",
+      "inversedBy": "menu_item"
     }
   }
 }

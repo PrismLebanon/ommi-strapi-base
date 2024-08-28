@@ -423,6 +423,7 @@ export interface PluginUploadFile extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    placeholder: Attribute.Text;
   };
 }
 
@@ -935,6 +936,9 @@ export interface ApiItemCategorieItemCategorie extends Schema.CollectionType {
       'oneToMany',
       'api::menu-item.menu-item'
     >;
+    _softDeletedAt: Attribute.DateTime & Attribute.Private;
+    _softDeletedById: Attribute.Integer & Attribute.Private;
+    _softDeletedByType: Attribute.String & Attribute.Private;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -950,9 +954,45 @@ export interface ApiItemCategorieItemCategorie extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+  };
+}
+
+export interface ApiItemImageItemImage extends Schema.CollectionType {
+  collectionName: 'item_images';
+  info: {
+    singularName: 'item-image';
+    pluralName: 'item-images';
+    displayName: 'ItemImage';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
     _softDeletedAt: Attribute.DateTime & Attribute.Private;
     _softDeletedById: Attribute.Integer & Attribute.Private;
     _softDeletedByType: Attribute.String & Attribute.Private;
+    itemImage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.Required;
+    menu_item: Attribute.Relation<
+      'api::item-image.item-image',
+      'oneToOne',
+      'api::menu-item.menu-item'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::item-image.item-image',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::item-image.item-image',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
   };
 }
 
@@ -1030,6 +1070,9 @@ export interface ApiMenuItemMenuItem extends Schema.CollectionType {
     };
   };
   attributes: {
+    _softDeletedAt: Attribute.DateTime & Attribute.Private;
+    _softDeletedById: Attribute.Integer & Attribute.Private;
+    _softDeletedByType: Attribute.String & Attribute.Private;
     itemName: Attribute.String &
       Attribute.Required &
       Attribute.Unique &
@@ -1051,12 +1094,6 @@ export interface ApiMenuItemMenuItem extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    itemPicture: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     item_tags: Attribute.Relation<
       'api::menu-item.menu-item',
       'oneToMany',
@@ -1071,6 +1108,11 @@ export interface ApiMenuItemMenuItem extends Schema.CollectionType {
       'api::menu-item.menu-item',
       'oneToMany',
       'api::item-additive.item-additive'
+    >;
+    item_image: Attribute.Relation<
+      'api::menu-item.menu-item',
+      'oneToOne',
+      'api::item-image.item-image'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1093,9 +1135,6 @@ export interface ApiMenuItemMenuItem extends Schema.CollectionType {
       'api::menu-item.menu-item'
     >;
     locale: Attribute.String;
-    _softDeletedAt: Attribute.DateTime & Attribute.Private;
-    _softDeletedById: Attribute.Integer & Attribute.Private;
-    _softDeletedByType: Attribute.String & Attribute.Private;
   };
 }
 
@@ -1121,6 +1160,7 @@ declare module '@strapi/types' {
       'api::blog.blog': ApiBlogBlog;
       'api::item-additive.item-additive': ApiItemAdditiveItemAdditive;
       'api::item-categorie.item-categorie': ApiItemCategorieItemCategorie;
+      'api::item-image.item-image': ApiItemImageItemImage;
       'api::item-tag.item-tag': ApiItemTagItemTag;
       'api::menu-item.menu-item': ApiMenuItemMenuItem;
     }
