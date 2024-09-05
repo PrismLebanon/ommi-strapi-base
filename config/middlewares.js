@@ -23,6 +23,7 @@ module.exports = ({ env }) => [
             "market-assets.strapi.io",
             env("SUPABASE_URL"),
           ],
+          "frame-src": [ "http://localhost:*", "self", "sandbox.embed.apollographql.com" ],
         },
       },
     },
